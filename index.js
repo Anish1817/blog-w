@@ -61,6 +61,10 @@ app.post("/delete/:id", (req, res) => {
     res.redirect("/");
 });
 
+app.use((req,res) =>{
+    res.status(404).render("error.ejs")
+})
+
 app.listen(port,()=>{
     console.log(`server running on ${port}`);
 })
