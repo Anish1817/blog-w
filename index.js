@@ -17,7 +17,7 @@ app.post("/create",(req,res)=>{
     const title = req.body.title;
     const content = req.body.content;
     if (!title || !content) {
-        return res.status(400).send("Title and content are required");
+        return res.status(400).render("error.ejs");
     }
     posts.push({
         id:Date.now(),
@@ -32,7 +32,7 @@ app.get("/edit/:id",(req,res)=>{
     const post = posts.find(post=>post.id === id);
 
     if (!post) {
-        return res.status(404).send("Post not found");
+        return res.status(404).render("error.ejs");
     }
 
     res.render("edit.ejs",{post});
@@ -44,7 +44,7 @@ app.post("/edit/:id", (req, res) => {
 
     const post = posts.find(post => post.id === id);
     if (!post) {
-        return res.status(404).send("Post not found");
+        return res.status(404).render("error.ejs");
     }
     post.title = req.body.title;
     post.content = req.body.content;
